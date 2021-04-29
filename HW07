@@ -1,0 +1,177 @@
+#ifndef __PROGTEST__
+
+#include <cstring>
+#include <cstdlib>
+#include <cstdio>
+#include <cassert>
+#include <cctype>
+#include <cmath>
+#include <iostream>
+#include <iomanip>
+#include <sstream>
+#include <set>
+#include <list>
+#include <forward_list>
+#include <map>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <functional>
+#include <memory>
+#include <stdexcept>
+
+using namespace std;
+#endif /* __PROGTEST__ */
+
+
+template<typename T_, typename Cmp_ = less<T_>>
+class CIntervalMin {
+    vector<T_> m_Data;
+    Cmp_ m_Cmp;
+
+public:
+    // default constructor
+    CIntervalMin<T_,Cmp_>(void) = default;
+
+    // constructor with comparator
+
+
+    CIntervalMin<T_, Cmp_>(const Cmp_ & gCmp )  {
+        m_Cmp = gCmp;
+    }
+
+    // constructor - 2 iterators + comparator
+    CIntervalMin<T_,Cmp_>(vector<T_>(i1), vector<T_>(i2)){
+
+
+    }
+    bool compare(Cmp_ cmp1){
+
+    }
+
+    // const_iterator
+
+
+    // push_back
+    void push_back(const T_ &value) {
+        m_Data.push_back(value);
+    }
+
+    // pop_back
+    void pop_back() {
+        m_Data.pop_back();
+    }
+
+    // min
+    T_ min( vector<T_>(it1),  vector<T_>(it2)) {
+        T_ t = m_Data[it1];
+        for(;it1 != it2; it1++ ){
+
+            if(m_Cmp(t,m_Data[it2]))
+                t = m_Data[it2];
+
+        }
+        return  t;
+    }
+
+    // begin
+
+
+    // end
+
+
+    // size
+    unsigned int size() const {
+        return m_Data.size();
+    }
+
+};
+
+
+template<typename T_, typename Cmp_>
+#ifndef __PROGTEST__
+//-------------------------------------------------------------------------------------------------
+class CStrComparator {
+public:
+    CStrComparator(bool byLength = true)
+            : m_ByLength(byLength) {
+    }
+
+    bool operator()(const string &a, const string &b) const {
+        return m_ByLength ? a.length() < b.length() : a < b;
+    }
+
+private:
+    bool m_ByLength;
+};
+
+//-------------------------------------------------------------------------------------------------
+bool strCaseCmpFn(const string &a, const string &b) {
+
+    return strcasecmp(a.c_str(), b.c_str()) < 0;
+}
+
+//-------------------------------------------------------------------------------------------------
+int main(void) {
+
+    CStrComparator<string, string> a;
+    CIntervalMin<int> a1;
+    for (auto x : initializer_list<int>{5, 15, 79, 62, -3, 0, 92, 16, 2, -4})
+        a1.push_back(x);
+
+    assert (a1.size() == 10);
+    vector<string> words{"auto", "if", "void", "NULL"};
+   CIntervalMin<string, CStrComparator> a4(words.begin(), words.end());
+
+     ostringstream oss;
+     for ( auto x : a1 )
+       oss << x << ' ';
+
+    /* assert ( oss . str () == "5 15 79 62 -3 0 92 16 2 -4 " );
+     assert ( a1 . min ( a1 . begin (), a1 . end () ) == -4 );
+     assert ( a1 . min ( a1 . begin () + 2, a1 . begin () + 3 ) == 79 );
+     assert ( a1 . min ( a1 . begin () + 2, a1 . begin () + 9 ) == -3 );
+
+     try
+     {
+       a1 . min ( a1 . begin (), a1 . begin () );
+       assert ( "Missing an exception" == nullptr );
+     }
+     catch ( const invalid_argument & e )
+     {
+     }
+     catch ( ... )
+     {
+       assert ( "Invalid exception" == nullptr );
+     }
+
+     a1 . pop_back ();
+     assert ( a1 . size () == 9 );
+     a1 . push_back ( 42 );
+
+     assert ( a1 . min ( a1 . begin (), a1 . end () ) == -3 );
+
+     vector<string> words{ "auto", "if", "void", "NULL" };
+     CIntervalMin <string> a2 ( words . begin (), words . end () );
+     assert ( a2 . min ( a2 . begin (), a2 . end () ) ==  "NULL" );
+
+     CIntervalMin <string, bool(*)(const string &, const string &)> a3 ( words . begin (), words . end (), strCaseCmpFn );
+     assert ( a3 . min ( a3 . begin (), a3 . end () ) == "auto" );
+
+     CIntervalMin <string, CStrComparator> a4 ( words . begin (), words . end () );
+     assert ( a4 . min ( a4 . begin (), a4 . end () ) == "if" );
+
+     CIntervalMin <string, CStrComparator> a5 ( words . begin (), words . end (), CStrComparator ( false ) );
+     assert ( a5 . min ( a5 . begin (), a5 . end () ) == "NULL" );
+
+     CIntervalMin <string, function<bool(const string &, const string &)> > a6 ( [] ( const string & a, const string & b )
+     {
+       return a > b;
+     } );
+     for ( const auto & w : words )
+       a6 . push_back ( w );
+     assert ( a6 . min ( a6 . begin (), a6 . end () ) == "void" );
+    return 0;*/
+}
+
+#endif /* __PROGTEST__ */
